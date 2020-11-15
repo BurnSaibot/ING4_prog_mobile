@@ -1,0 +1,1294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ChessBoardFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TableLayout
+            android:id="@+id/layoutChessBoardMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:id="@+id/layoutChessBoardRaw1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileH1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileH1BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                    <ImageView
+                        android:id="@+id/rook1white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/white_rook" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileG1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileg1BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                    <ImageView
+                        android:id="@+id/knight1White"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/white_king" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileF1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileF1BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                    <ImageView
+                        android:id="@+id/bishop1white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/white_bishop" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileE1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileE1BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                    <ImageView
+                        android:id="@+id/king1white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/white_king" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileD1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileD1BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                    <ImageView
+                        android:id="@+id/queen1white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/white_queen" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileC1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileC1BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                    <ImageView
+                        android:id="@+id/bishop2white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/white_bishop" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileB1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileB1BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                    <ImageView
+                        android:id="@+id/knight2White"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/white_knight" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileA1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileA1BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                    <ImageView
+                        android:id="@+id/rook2white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/white_rook" />
+
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/layoutChessBoardRaw2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileH2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileH2BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                    <ImageView
+                        android:id="@+id/pawn1White"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/white_pawn" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileG2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileG2BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                    <ImageView
+                        android:id="@+id/pawn2White"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/white_pawn" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileF2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileF2BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                    <ImageView
+                        android:id="@+id/pawn3White"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/white_pawn" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileE2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileE2BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                    <ImageView
+                        android:id="@+id/pawn4White"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/white_pawn" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileD2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileD2BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                    <ImageView
+                        android:id="@+id/pawn5White"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/white_pawn" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileC2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileC2BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                    <ImageView
+                        android:id="@+id/pawn6White"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/white_pawn" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileB2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileB2BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                    <ImageView
+                        android:id="@+id/pawn7White"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/white_pawn" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileA2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileA2BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                    <ImageView
+                        android:id="@+id/pawn8White"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/white_pawn" />
+
+
+                </RelativeLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/layoutChessBoardRaw3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileH3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileH3BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileG3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileG3BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileF3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileF3BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileE3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileE3BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileD3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileD3BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileC3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileC3BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileB3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileB3BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileA3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileA3BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/layoutChessBoardRaw4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileH4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileH4BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileG4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileG4BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileF4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileF4BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileE4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileE4BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileD4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileD4BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileC4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileC4BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileB4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileB4BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileA4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileA4BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/layoutChessBoardRaw5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileH5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileH5BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileG5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileG5BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileF5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileF5BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileE5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileE5BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileD5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileD5BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileC5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileC5BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileB5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileB5BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileA5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileA5BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/layoutChessBoardRaw6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileH6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileH6BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileG6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileG6BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileF6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileF6BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileE6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileE6BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileD6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileD6BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileC6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileC6BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileB6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileB6BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileA6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileA6BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/layoutChessBoardRaw7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileH7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileH7BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                    <ImageView
+                        android:id="@+id/pawn1Dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/dark_pawn" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileG7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileG7BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                    <ImageView
+                        android:id="@+id/pawn2Dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/dark_pawn" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileF7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileF7BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                    <ImageView
+                        android:id="@+id/pawn3Dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/dark_pawn" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileE7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileE7BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                    <ImageView
+                        android:id="@+id/pawn4Dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/dark_pawn" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileD7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileD7BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                    <ImageView
+                        android:id="@+id/pawn5Dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/dark_pawn" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileC7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileC7BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                    <ImageView
+                        android:id="@+id/pawn6Dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/dark_pawn" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileB7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileB7BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                    <ImageView
+                        android:id="@+id/pawn7Dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/dark_pawn" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileA7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileA7BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                    <ImageView
+                        android:id="@+id/pawn8Dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/dark_pawn" />
+
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/layoutChessBoardRaw8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileH8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileH8BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                    <ImageView
+                        android:id="@+id/rook1dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/dark_rook" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileG8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileG8BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                    <ImageView
+                        android:id="@+id/knight1dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/dark_knight" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileF8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileF8BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                    <ImageView
+                        android:id="@+id/bishop1dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/dark_bishop" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileE8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileE8BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                    <ImageView
+                        android:id="@+id/king1dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/dark_king" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileD8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileD8BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                    <ImageView
+                        android:id="@+id/queen1dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/dark_queen" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileC8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileC8BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                    <ImageView
+                        android:id="@+id/bishop2dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/dark_bishop" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileB8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileB8BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick=" *backgroundClick"
+                        app:srcCompat="@drawable/dark_background" />
+
+                    <ImageView
+                        android:id="@+id/knight2dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/dark_knight" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layoutChessBoardTileA8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/layoutChessBoardTileA8BackGroundImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="backgroundClick"
+                        app:srcCompat="@drawable/clear_background" />
+
+                    <ImageView
+                        android:id="@+id/rook2dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="pieceClick"
+                        app:srcCompat="@drawable/dark_rook" />
+
+                </RelativeLayout>
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+
+</FrameLayout>
