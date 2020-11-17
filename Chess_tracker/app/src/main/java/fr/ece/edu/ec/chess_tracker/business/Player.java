@@ -1,6 +1,8 @@
 package fr.ece.edu.ec.chess_tracker.business;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     private int idUser;
     private String email;
     private String pwd;

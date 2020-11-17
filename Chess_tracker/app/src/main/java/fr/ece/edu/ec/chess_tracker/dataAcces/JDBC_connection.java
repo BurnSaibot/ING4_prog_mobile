@@ -1,11 +1,8 @@
 package fr.ece.edu.ec.chess_tracker.dataAcces;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class JDBC_connection {
     private static final String PROPERTY_FILE = "connection.properties";
@@ -14,6 +11,8 @@ public class JDBC_connection {
     private static final String PROPERTY_PORT = "port";
     private static final String PROPERTY_PWD = "pwd";
     private static final String PROPERTY_DBNAME = "dbName";
+
+
 
     static Connection conn;
 
@@ -27,6 +26,7 @@ public class JDBC_connection {
      * @throws Exception if connection failed
      */
     private JDBC_connection(String serv, String dbName, int port, String usr, String pwd) throws SQLException {
+
         String url = "jdbc:mysql://"+serv+":"+port+"/"+dbName;
         url+="?useUnicode=true";
         url+="&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&";
@@ -41,19 +41,12 @@ public class JDBC_connection {
      * @throws Exception if connection failed
      */
     public static Connection getConnection() throws SQLException {
-        Properties properties = new Properties();
-        try (InputStream propertyFile = JDBC_connection.class.getClassLoader().getResourceAsStream(PROPERTY_FILE)) {
-
-            properties.load(propertyFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String server = properties.getProperty(PROPERTY_SERVER);
-        String user = properties.getProperty(PROPERTY_USER);
-        String pwd = properties.getProperty(PROPERTY_PWD);
-        int port = Integer.parseInt(properties.getProperty(PROPERTY_PORT));
-        String dbName = properties.getProperty(PROPERTY_DBNAME);
+        //Class.forName("com.mysql.jdbc.Driver");
+        String server = "remotemysql.com";
+        String user = "Tm58uEFfeX";
+        String pwd = "nyaplErePq";
+        int port = 3306;
+        String dbName = "Tm58uEFfeX";
 
         if (conn == null || conn.isClosed()) {
             System.out.println("INSTANCIATION DE LA CONNEXION SQL ! ");

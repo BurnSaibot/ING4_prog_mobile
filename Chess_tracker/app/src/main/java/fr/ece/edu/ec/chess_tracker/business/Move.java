@@ -1,6 +1,8 @@
 package fr.ece.edu.ec.chess_tracker.business;
 
-public class Move {
+import java.io.Serializable;
+
+public class Move implements Serializable {
     private ChessGame game;
     private String from;
     private String to;

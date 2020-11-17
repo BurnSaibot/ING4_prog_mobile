@@ -2,16 +2,35 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.ece.edu.ec.chess_tracker">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".RegisterPlayerActivity"></activity>
-        <activity android:name=".WatchParty" />
-        <activity android:name=".RegisterGame" />
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".MainMenu"></activity>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/sign_in_string" />
+        <activity
+            android:name=".RegisterPlayerActivity"
+            android:label="@string/sign_up_string" />
+        <activity
+            android:name=".WatchParty"
+            android:label="@string/watch_game" />
+        <activity
+            android:name=".RegisterGame"
+            android:label="@string/register_game" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

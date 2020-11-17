@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 import fr.ece.edu.ec.chess_tracker.business.Player;
 
+import static fr.ece.edu.ec.chess_tracker.dataAcces.JDBC_connection.conn;
+
 public class PlayerDAO {
 
     public static Player connectPlayer(String email, String password) {
@@ -23,12 +25,14 @@ public class PlayerDAO {
         try (Connection conn = JDBC_connection.getConnection()) {
             selectOne = conn.prepareStatement(querry);
             selectOne.setString(1, email);
-            selectOne.setString(2, password);
-            if ( selectOne.execute()) {
+            selectOne.setString(2, digestPassword(password));
+
+            if (selectOne.execute()) {
                 res = selectOne.getResultSet();
             }
-            if ( res != null) {
-                while (res.next()){
+            if (res != null) {
+                System.out.println("C'est la oui vie");
+                while (res.next()) {
                     Player tmp = new Player(
                             res.getInt("userID"),
                             res.getString("email"),
@@ -36,11 +40,13 @@ public class PlayerDAO {
                             res.getInt("elo"),
                             res.getString("name"),
                             res.getString("surname"));
+                    System.out.println("Player found : " + tmp);
                     result.add(tmp);
                 }
+            } else {
+                System.out.println("ResultSet is empty!");
             }
-            conn.commit();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return result.size() > 0 ? result.get(0) : null;
@@ -53,7 +59,7 @@ public class PlayerDAO {
         ResultSet res = null;
         ArrayList<Player> result = new ArrayList<>();
 
-        String querry = "insert into User(email, password, elo, name, surname) values (?, ?, ?, ?, ?)";
+        String querry = "insert into player(email, password, elo, name, surname) values (?, ?, ?, ?, ?)";
 
         try (Connection conn = JDBC_connection.getConnection()) {
             registerPlayer = conn.prepareStatement(querry);
@@ -62,13 +68,23 @@ public class PlayerDAO {
             registerPlayer.setInt(3, newPlayer.getElo());
             registerPlayer.setString(4, newPlayer.getName());
             registerPlayer.setString(5, newPlayer.getSurname());
-            if (registerPlayer.execute()) {
+            int nbRowInserted = registerPlayer.executeUpdate();
+            if (nbRowInserted == 1) {
                 System.out.println("Player was registered:" + newPlayer);
+                conn.commit();
+            } else {
+                System.out.println("Row was not inserted");
             }
-        } catch (SQLException e ) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace(System.err);
+            try {
+                conn.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
-        return connectPlayer(newPlayer.getEmail(), newPlayer.getPwd());
+
+        return connectPlayer(mail, password);
     }
 
     public static String digestPassword(String password) {
@@ -78,7 +94,7 @@ public class PlayerDAO {
             byte[] digestedPwd = md.digest(password.getBytes());
             StringBuffer hexString = new StringBuffer();
 
-            for (int i = 0; i<digestedPwd.length; i++) {
+            for (int i = 0; i < digestedPwd.length; i++) {
                 hexString.append(Integer.toHexString(0xFF & digestedPwd[i]));
             }
             return hexString.toString();
