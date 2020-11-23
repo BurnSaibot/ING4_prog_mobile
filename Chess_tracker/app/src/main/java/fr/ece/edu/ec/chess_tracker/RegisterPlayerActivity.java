@@ -57,16 +57,14 @@ public class RegisterPlayerActivity extends AppCompatActivity {
         final String pwd = inputPassword.getText().toString();
         final String email = inputEmail.getText().toString();
 
-
         new Thread(new Runnable() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void run() {
                 final Player me = PlayerDAO.registerPlayer(email.toUpperCase(), pwd, name.toUpperCase(), surname.toUpperCase(), new Integer(1000));
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        launchInstance(MainMenu.class, me);
+                        launchIntent(MainMenu.class, me);
                     }
                 });
             }
@@ -75,7 +73,7 @@ public class RegisterPlayerActivity extends AppCompatActivity {
 
     }
 
-    private void launchInstance(Class c, Player me ) {
+    private void launchIntent(Class c, Player me ) {
         Intent i = new Intent(this, c);
         i.putExtra("me", me);
         this.startActivity(i);

@@ -14,8 +14,15 @@
     <string name="email_player">Email:</string>
     <string name="password_player">Password:</string>
     <string name="password_verif_player">Enter password again:</string>
-    <string name="register_game">Register a chess game</string>
+    <string name="register_game">Register this chess game</string>
     <string name="watch_game">Replay a game</string>
     <string name="register_new_game">Register a new game</string>
     <string name="id_player">User ID:</string>
+    <string name="id_oponent">Oponent ID:</string>
+    <string name="fillOponentId">If your oponent does not use the app, just let 0 as default value. Or just let him know about the app ;)</string>
+    <string name="chooseColor">Your color:</string>
+    <string name="surrenderWhite">White surrender</string>
+    <string name="surrenderBlack">Black Surrender</string>
+    <string name="draw">Draw</string>
+    <string name="currentMoveNumber">"Current Move: "</string>
 </resources>

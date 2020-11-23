@@ -2,23 +2,43 @@ package fr.ece.edu.ec.chess_tracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.github.bhlangonijr.chesslib.Board;
+import com.github.bhlangonijr.chesslib.Side;
 import com.github.bhlangonijr.chesslib.Square;
 import com.github.bhlangonijr.chesslib.move.Move;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import fr.ece.edu.ec.chess_tracker.business.ChessMove;
+import fr.ece.edu.ec.chess_tracker.business.Player;
+import fr.ece.edu.ec.chess_tracker.dataAcces.ChessGameDAO;
+import fr.ece.edu.ec.chess_tracker.dataAcces.PlayerDAO;
 
 public class RegisterGame extends AppCompatActivity {
+    private Player me;
     private int idFirstTileHit = -1;
     private int idSecondTileHit = -1;
     private ImageView selectedPiece;
     private Board boardGame;
     private HashMap<Integer, Square> idToSquare;
+    private String array_spinner[] = new String[2];
+    private List<ChessMove> gameMoves;
+    private int moveCounter;
+    Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +46,16 @@ public class RegisterGame extends AppCompatActivity {
         setContentView(R.layout.activity_register_game);
         boardGame = new Board();
         idToSquare = new HashMap<>();
+        Intent intent = getIntent();
+        if (intent != null ) {
+            me = (Player) intent.getSerializableExtra("me");
+        }
+        gameMoves = new ArrayList<>();
         initMap();
+        initSpinner();
     }
 
     public void backgroundClick (View v) {
-        System.out.println("Clicked a Tile");
         if (selectedPiece == null) {
             return;
         }
@@ -38,16 +63,19 @@ public class RegisterGame extends AppCompatActivity {
         Square s1 = idToSquare.get(idFirstTileHit);
         Square s2 = idToSquare.get(idSecondTileHit);
         Move tmp = new Move(s1, s2);
-        if (boardGame.isMoveLegal(tmp, true)) {
+        checkGameStatus();
+        if (boardGame.legalMoves().contains(tmp) && boardGame.isMoveLegal(tmp, true)) {
             boardGame.doMove(tmp);
             RelativeLayout parent = (RelativeLayout) selectedPiece.getParent();
             parent.removeView(selectedPiece);
             RelativeLayout destination = findViewById(idSecondTileHit);
             destination.addView(selectedPiece);
+            gameMoves.add(new ChessMove(tmp, moveCounter));
+            moveCounter++;
             clear();
+            checkGameStatus();
         } else {
-            idSecondTileHit = -1;
-            System.out.println("Move:" + tmp + ", is not legal !!!!");
+            displayShortToast("Move:" + tmp + " is not legal !!!!");
             clear();
         }
     }
@@ -55,14 +83,13 @@ public class RegisterGame extends AppCompatActivity {
     public void pieceClick (View v) {
         int tileId = ((View) v.getParent()).getId();
         if (tileId == idFirstTileHit) {
-            idFirstTileHit = -1;
-            selectedPiece = null;
+            clear();
         } else if (selectedPiece != null){
             idSecondTileHit = ((View) v.getParent()).getId();
             Square s1 = idToSquare.get(idFirstTileHit);
             Square s2 = idToSquare.get(tileId);
             Move tmp = new Move(s1, s2);
-            if (boardGame.isMoveLegal(tmp, true)) {
+            if (boardGame.legalMoves().contains(tmp) && boardGame.isMoveLegal(tmp, true)) {
                 boardGame.doMove(tmp);
                 RelativeLayout parent = (RelativeLayout) v.getParent();
                 parent.removeView(v);
@@ -70,18 +97,79 @@ public class RegisterGame extends AppCompatActivity {
                 parent.removeView(selectedPiece);
                 RelativeLayout destination = findViewById(idSecondTileHit);
                 destination.addView(selectedPiece);
-                System.out.println("Doing move:" + tmp);
+                gameMoves.add(new ChessMove(tmp, moveCounter));
+                moveCounter++;
                 clear();
+                checkGameStatus();
             } else {
-                idSecondTileHit = -1;
-                System.out.println("Move:" + tmp + ", is not legal !!!!");
+                displayShortToast("Move:" + tmp + " is not legal !!!!");
                 clear();
             }
         } else {
             selectedPiece = (ImageView) v;
             idFirstTileHit = tileId;
-            System.out.println("Selected a piece on tile " + idToSquare.get(tileId));
         }
+    }
+
+    public void registerGame(View v) {
+        EditText inputNamePlayer = (EditText) findViewById(R.id.inputOponentId);
+        Spinner colorSpinner = (Spinner) findViewById(R.id.inputPlayerColor);
+
+        int oponentId = Integer.parseInt(inputNamePlayer.getText().toString());
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                final Player oponent = PlayerDAO.getPlayerFromId(oponentId);
+                Side s = boardGame.getSideToMove();
+
+                if (colorSpinner.getSelectedItem().toString().equals(getString(R.string.the_white))) {
+                    System.out.println("Side: " + s + " playing: " + getString(R.string.the_white));
+                    Player winner = (s.value().equals("WHITE")) ? oponent : me;
+                    ChessGameDAO.insertChessGame(gameMoves, me, oponent, winner);
+                } else {
+                    System.out.println("Side: " + s + " playing: " + getString(R.string.the_dark));
+                    Player winner = (s.value().equals("BLACK")) ? oponent : me;
+                    ChessGameDAO.insertChessGame(gameMoves, oponent, me, winner);
+                }
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        launchIntent(MainMenu.class, me);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public void registerDraw(View v) {
+        EditText inputNamePlayer = (EditText) findViewById(R.id.inputOponentId);
+        Spinner colorSpinner = (Spinner) findViewById(R.id.inputPlayerColor);
+
+        int oponentId = Integer.parseInt(inputNamePlayer.getText().toString());
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                final Player oponent = PlayerDAO.getPlayerFromId(oponentId);
+                Side s = boardGame.getSideToMove();
+
+                if (colorSpinner.getSelectedItem().toString().equals(getString(R.string.the_white))) {
+                    ChessGameDAO.insertChessGame(gameMoves, me, oponent, null);
+                } else {
+                    System.out.println("Side: " + s + " playing: " + getString(R.string.the_dark));
+                    ChessGameDAO.insertChessGame(gameMoves, oponent, me, null);
+                }
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        launchIntent(MainMenu.class, me);
+                    }
+                });
+            }
+        }).start();
     }
 
     private void initMap() {
@@ -151,9 +239,52 @@ public class RegisterGame extends AppCompatActivity {
         idToSquare.put(new Integer(R.id.layoutChessBoardTileH8), Square.H8);
     }
 
+    private void initSpinner() {
+        Spinner chooseColor = findViewById(R.id.inputPlayerColor);
+        array_spinner[0] = getString(R.string.the_white);
+        array_spinner[1] = getString(R.string.the_dark);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, array_spinner);
+        chooseColor.setAdapter(adapter);
+    }
+
+    private void checkGameStatus(){
+        if (boardGame.isMated()) {
+            displayLongToast("Mated");
+            Button btnRegister = findViewById(R.id.btnValidateAndRegisterGame);
+            btnRegister.setEnabled(true);
+        }
+        if (boardGame.isDraw()) {
+            displayLongToast("Draw!!");
+            Button btnRegister = findViewById(R.id.btnValidateAndRegisterGame);
+            btnRegister.setEnabled(true);
+        }
+    }
+
+    private void displayShortToast(String msg) {
+        Toast errorMessage = new Toast(getApplicationContext());
+        errorMessage.setText(msg);
+        errorMessage.setDuration(Toast.LENGTH_SHORT);
+        errorMessage.show();
+        return;
+    }
+
+    private void displayLongToast(String msg) {
+        Toast errorMessage = new Toast(getApplicationContext());
+        errorMessage.setText(msg);
+        errorMessage.setDuration(Toast.LENGTH_LONG);
+        errorMessage.show();
+        return;
+    }
+
     private void clear() {
         idFirstTileHit = -1;
         idSecondTileHit = -1;
         selectedPiece = null;
+    }
+
+    private void launchIntent(Class c, Player me ) {
+        Intent i = new Intent(this, c);
+        i.putExtra("me", me);
+        this.startActivity(i);
     }
 }

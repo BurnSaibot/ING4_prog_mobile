@@ -34,7 +34,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
         new Thread(new Runnable() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void run() {
                 final Player me = PlayerDAO.connectPlayer(email.toUpperCase(), pwd);

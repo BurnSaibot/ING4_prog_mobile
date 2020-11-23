@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".WatchParty">
+    tools:context=".WatchGame">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,14 +14,16 @@
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_weight="0.5">
+            android:layout_weight="0.5"
+            android:background="@drawable/border"
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/the_white"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="36sp" />
+                android:textSize="32sp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,16 +51,18 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="0px"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="0.5">
+            android:layout_weight="0.5"
+            android:background="@drawable/border"
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/the_dark"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="36sp" />
+                android:textSize="32sp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -113,7 +117,24 @@
         <TextView
             android:id="@+id/textViewNbPlayedMove"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="0"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/currentMoveNumber"/>
+        <TextView
+            android:id="@+id/currentMoveNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"/>
     </LinearLayout>
 
     <LinearLayout
@@ -139,21 +160,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:onClick="menuOnClick"
+            android:onClick="moveBackward"
             app:srcCompat="@drawable/move_back"/>
         <ImageView
             android:id="@+id/btnMoveForward"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:onClick="menuOnClick"
+            android:onClick="moveForward"
             app:srcCompat="@drawable/move_forward"/>
         <ImageView
             android:id="@+id/btnFinalMove"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:onClick="menuOnClick"
+            android:onClick="play2moves"
             app:srcCompat="@drawable/last_move"/>
     </LinearLayout>
 </LinearLayout>

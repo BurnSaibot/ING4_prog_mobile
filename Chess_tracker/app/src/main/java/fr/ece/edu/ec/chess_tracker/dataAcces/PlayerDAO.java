@@ -31,7 +31,6 @@ public class PlayerDAO {
                 res = selectOne.getResultSet();
             }
             if (res != null) {
-                System.out.println("C'est la oui vie");
                 while (res.next()) {
                     Player tmp = new Player(
                             res.getInt("userID"),
@@ -73,18 +72,49 @@ public class PlayerDAO {
                 System.out.println("Player was registered:" + newPlayer);
                 conn.commit();
             } else {
+                conn.rollback();
                 System.out.println("Row was not inserted");
             }
         } catch (SQLException e) {
-            e.printStackTrace(System.err);
-            try {
-                conn.rollback();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
         }
 
         return connectPlayer(mail, password);
+    }
+
+    public static Player getPlayerFromId(int idPlayer) {
+        PreparedStatement selectOne = null;
+        ResultSet res = null;
+        ArrayList<Player> result = new ArrayList<>();
+
+        String querry = "Select * from player where `userId` = ?";
+
+        try (Connection conn = JDBC_connection.getConnection()) {
+            selectOne = conn.prepareStatement(querry);
+            selectOne.setInt(1, idPlayer);
+
+            if (selectOne.execute()) {
+                res = selectOne.getResultSet();
+            }
+            if (res != null) {
+                while (res.next()) {
+                    Player tmp = new Player(
+                            res.getInt("userID"),
+                            res.getString("email"),
+                            res.getString("password"),
+                            res.getInt("elo"),
+                            res.getString("name"),
+                            res.getString("surname"));
+                    System.out.println("Player found : " + tmp);
+                    result.add(tmp);
+                }
+            } else {
+                System.out.println("ResultSet is empty!");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result.size() > 0 ? result.get(0) : null;
+
     }
 
     public static String digestPassword(String password) {

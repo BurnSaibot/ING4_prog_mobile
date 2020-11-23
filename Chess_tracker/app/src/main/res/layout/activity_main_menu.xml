@@ -81,6 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
+            android:id="@+id/myGameDisplayer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -88,13 +89,14 @@
             <Button
                 android:id="@+id/btnRegisterNewGame"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:background="@drawable/border"
                 android:clickable="true"
                 android:onClick="onClickRegisterNewGame"
                 android:text="@string/register_new_game"
                 android:textSize="30sp" />
+
 
         </LinearLayout>
     </ScrollView>
