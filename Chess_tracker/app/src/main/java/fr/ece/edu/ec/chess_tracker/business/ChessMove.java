@@ -1,27 +1,29 @@
 package fr.ece.edu.ec.chess_tracker.business;
 
+import com.github.bhlangonijr.chesslib.move.Move;
+
 import java.io.Serializable;
 
-public class Move implements Serializable {
+public class ChessMove implements Serializable {
     private int gameId;
     private String from;
     private String to;
     private int moveNumber;
 
-    public Move(int gameId, String from, String to, int moveNumber) {
+    public ChessMove(int gameId, String from, String to, int moveNumber) {
         this.gameId = gameId;
         this.from = from;
         this.to = to;
         this.moveNumber = moveNumber;
     }
 
-    public Move(String from, String to, int moveNumber) {
+    public ChessMove(String from, String to, int moveNumber) {
         this.from = from;
         this.to = to;
         this.moveNumber = moveNumber;
     }
 
-    public Move(com.github.bhlangonijr.chesslib.move.Move move, int moveNumber) {
+    public ChessMove(Move move, int moveNumber) {
         this.from = move.getFrom().toString();
         this.to = move.getTo().toString();
         this.moveNumber = moveNumber;
