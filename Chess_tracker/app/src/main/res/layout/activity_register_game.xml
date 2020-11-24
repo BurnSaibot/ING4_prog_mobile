@@ -82,12 +82,21 @@
             android:onClick="registerGame"
             android:text="@string/surrenderWhite"/>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnRegisterPicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.10"
+        android:text="@string/registerPicture"
+        android:onClick="takePicture"
+        android:enabled="true"/>
     <Button
         android:id="@+id/btnValidateAndRegisterGame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.10"
-        android:text="@string/register_game"
+        android:enabled="false"
         android:onClick="registerGame"
-        android:enabled="false"/>
+        android:text="@string/register_game" />
 </LinearLayout>

@@ -1,10 +1,19 @@
 package fr.ece.edu.ec.chess_tracker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,13 +28,23 @@ import com.github.bhlangonijr.chesslib.Side;
 import com.github.bhlangonijr.chesslib.Square;
 import com.github.bhlangonijr.chesslib.move.Move;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import fr.ece.edu.ec.chess_tracker.business.ChessGame;
+import fr.ece.edu.ec.chess_tracker.business.ChessGameImage;
 import fr.ece.edu.ec.chess_tracker.business.ChessMove;
 import fr.ece.edu.ec.chess_tracker.business.Player;
 import fr.ece.edu.ec.chess_tracker.dataAcces.ChessGameDAO;
+import fr.ece.edu.ec.chess_tracker.dataAcces.ChessGameImageDAO;
 import fr.ece.edu.ec.chess_tracker.dataAcces.PlayerDAO;
 
 public class RegisterGame extends AppCompatActivity {
@@ -40,6 +59,11 @@ public class RegisterGame extends AppCompatActivity {
     private int moveCounter;
     Handler handler = new Handler();
 
+    private Button takePictureButton;
+    //private Uri imageUri;
+    private Bitmap image;
+    private boolean hasTakenAPicture;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +74,40 @@ public class RegisterGame extends AppCompatActivity {
         if (intent != null ) {
             me = (Player) intent.getSerializableExtra("me");
         }
+        hasTakenAPicture = false;
         gameMoves = new ArrayList<>();
         initMap();
         initSpinner();
+
+        takePictureButton = (Button) findViewById(R.id.btnRegisterPicture);
+
+        // Checking for permission (Camera
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, 0);
+        }
+    }
+
+    // if needing permission and permission are given, we enable the button to take pictures
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 0) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                takePictureButton.setEnabled(true);
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            if (resultCode == RESULT_OK) {
+                image = (Bitmap) data.getExtras().get("data");
+                displayShortToast("Image has been added");
+                hasTakenAPicture = true;
+            }
+        }
     }
 
     public void backgroundClick (View v) {
@@ -123,15 +178,29 @@ public class RegisterGame extends AppCompatActivity {
 
                 final Player oponent = PlayerDAO.getPlayerFromId(oponentId);
                 Side s = boardGame.getSideToMove();
-
+                ChessGame insertedGame = null;
                 if (colorSpinner.getSelectedItem().toString().equals(getString(R.string.the_white))) {
                     System.out.println("Side: " + s + " playing: " + getString(R.string.the_white));
                     Player winner = (s.value().equals("WHITE")) ? oponent : me;
-                    ChessGameDAO.insertChessGame(gameMoves, me, oponent, winner);
+                    insertedGame = ChessGameDAO.insertChessGame(gameMoves, me, oponent, winner);
                 } else {
                     System.out.println("Side: " + s + " playing: " + getString(R.string.the_dark));
                     Player winner = (s.value().equals("BLACK")) ? oponent : me;
-                    ChessGameDAO.insertChessGame(gameMoves, oponent, me, winner);
+                    insertedGame = ChessGameDAO.insertChessGame(gameMoves, oponent, me, winner);
+                }
+                if (hasTakenAPicture && insertedGame != null) {
+                    /*File f = new File(imageUri.getPath());
+                    try {
+                        ChessGameImage imageToInput = new ChessGameImage(insertedGame.getIdPartie(), Files.readAllBytes(Paths.get(imageUri.getPath())));
+                        ChessGameImageDAO.insertImage(imageToInput);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }*/
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byte [] imageInByteArray = stream.toByteArray();
+                    ChessGameImage imageToInput = new ChessGameImage(insertedGame.getIdPartie(), imageInByteArray);
+                    ChessGameImageDAO.insertImage(imageToInput);
                 }
                 handler.post(new Runnable() {
                     @Override
@@ -152,15 +221,24 @@ public class RegisterGame extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                ChessGame insertedGame;
 
                 final Player oponent = PlayerDAO.getPlayerFromId(oponentId);
                 Side s = boardGame.getSideToMove();
 
                 if (colorSpinner.getSelectedItem().toString().equals(getString(R.string.the_white))) {
-                    ChessGameDAO.insertChessGame(gameMoves, me, oponent, null);
+                    insertedGame = ChessGameDAO.insertChessGame(gameMoves, me, oponent, null);
                 } else {
                     System.out.println("Side: " + s + " playing: " + getString(R.string.the_dark));
-                    ChessGameDAO.insertChessGame(gameMoves, oponent, me, null);
+                    insertedGame = ChessGameDAO.insertChessGame(gameMoves, oponent, me, null);
+                }
+                if (hasTakenAPicture && insertedGame != null) {
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byte [] imageInByteArray = stream.toByteArray();
+                    ChessGameImage imageToInput = new ChessGameImage(insertedGame.getIdPartie(), imageInByteArray);
+                    ChessGameImageDAO.insertImage(imageToInput);
+
                 }
                 handler.post(new Runnable() {
                     @Override
@@ -170,6 +248,32 @@ public class RegisterGame extends AppCompatActivity {
                 });
             }
         }).start();
+    }
+
+    public void takePicture(View v) {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        //imageUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", getOutputMediaFile());
+        //intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+
+        startActivityForResult(intent, 100);
+    }
+
+    private static File getOutputMediaFile(){
+        //saving pictures into came file out of the application, we will also save it into the database in regiserGame(View V) or registerDraw(View V)
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "Chess_game");
+
+        //if there is no local place to store pictures, we just do nothing
+        if (!mediaStorageDir.exists()){
+            if (!mediaStorageDir.mkdirs()){
+                return null;
+            }
+        }
+
+        //saving pictures : developer.android.com/guide/topics/media/camera.html#saving-media
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        return new File(mediaStorageDir.getPath() + File.separator +
+                "IMG_"+ timeStamp + ".jpg");
     }
 
     private void initMap() {

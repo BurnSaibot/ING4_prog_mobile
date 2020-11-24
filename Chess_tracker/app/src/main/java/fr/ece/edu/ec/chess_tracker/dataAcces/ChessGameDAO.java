@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import fr.ece.edu.ec.chess_tracker.business.ChessGame;
 import fr.ece.edu.ec.chess_tracker.business.ChessMove;
@@ -25,13 +27,15 @@ public class ChessGameDAO {
 
         String querryInsertGame = "insert into Game(idPlayer1, idPlayer2, winner, title) values(?, ?, ?, ?)";
         String querryInsertMove = "insert into Move(idGame, numberMove, fromSquare, toSquare) values(?, ?, ?, ?)";
+        Date d = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         try (Connection conn = JDBC_connection.getConnection()) {
             insertChessGame = conn.prepareStatement(querryInsertGame, Statement.RETURN_GENERATED_KEYS);
             insertChessGame.setInt(1, player1.getIdUser());
             insertChessGame.setInt(2, player2.getIdUser());
             insertChessGame.setInt(3, (winner != null) ? winner.getIdUser() : -1);
-            insertChessGame.setString(4, player1.getName() + " vs " + player2.getName());
+            insertChessGame.setString(4, player1.getName() + " vs " + player2.getName() + ":" + format.format(d));
 
             int nbRowInserted = insertChessGame.executeUpdate();
             if (nbRowInserted == 1) {

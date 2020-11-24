@@ -25,4 +25,5 @@
     <string name="surrenderBlack">Black Surrender</string>
     <string name="draw">Draw</string>
     <string name="currentMoveNumber">"Current Move: "</string>
+    <string name="registerPicture">Add image to game</string>
 </resources>

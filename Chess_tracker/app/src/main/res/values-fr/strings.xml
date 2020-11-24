@@ -26,4 +26,5 @@
     <string name="surrenderBlack">Abandon Noirs</string>
     <string name="draw">Match Nul</string>
     <string name="currentMoveNumber">"Déplacement n° : "</string>
+    <string name="registerPicture">Enregister une photo</string>
 </resources>

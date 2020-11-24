@@ -2,11 +2,17 @@ package fr.ece.edu.ec.chess_tracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,9 +26,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import fr.ece.edu.ec.chess_tracker.business.ChessGame;
+import fr.ece.edu.ec.chess_tracker.business.ChessGameImage;
 import fr.ece.edu.ec.chess_tracker.business.ChessMove;
 import fr.ece.edu.ec.chess_tracker.business.Player;
 import fr.ece.edu.ec.chess_tracker.dataAcces.ChessGameDAO;
+import fr.ece.edu.ec.chess_tracker.dataAcces.ChessGameImageDAO;
 import fr.ece.edu.ec.chess_tracker.dataAcces.PlayerDAO;
 
 public class WatchGame extends AppCompatActivity {
@@ -35,15 +43,16 @@ public class WatchGame extends AppCompatActivity {
     private HashMap<Square, Integer> squareToViewIds;
     private HashMap<Piece, Integer> chessPieceToViewPiece;
 
+    private Context myContext;
+
     private Handler handler = new Handler();
-
-
-
+    private List<ChessGameImage> gameImages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_watch_game);
+        myContext = this.getApplicationContext();
         Intent intent = getIntent();
         if (intent != null) {
             gameId = intent.getIntExtra("gameId", -1);
@@ -66,6 +75,7 @@ public class WatchGame extends AppCompatActivity {
                 }
                 player1 = PlayerDAO.getPlayerFromId(chessGame.getPlayer1());
                 player2 = PlayerDAO.getPlayerFromId(chessGame.getPlayer2());
+                gameImages = ChessGameImageDAO.getImageFromMyGame(chessGame.getIdPartie());
 
                 handler.post(new Runnable() {
                     @Override
@@ -91,6 +101,7 @@ public class WatchGame extends AppCompatActivity {
 
                         TextView numberOfMoves = findViewById(R.id.textViewNbPlayedMove);
                         numberOfMoves.setText(String.valueOf(chessGame.getChessMoves().size()));
+                        displayImages();
 
                     }
                 });
@@ -260,6 +271,34 @@ public class WatchGame extends AppCompatActivity {
         TextView numberOfMoves = findViewById(R.id.currentMoveNumber);
         numberOfMoves.setText(String.valueOf(moveCounter));
     }
+
+    private void displayImages() {
+        LinearLayout container = findViewById(R.id.imageShower);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<ChessGameImage> myImages = ChessGameImageDAO.getImageFromMyGame(gameId);
+                for(ChessGameImage i : myImages){
+                    ImageView newImage = new ImageView(myContext);
+                    newImage.setLayoutParams(lp);
+
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            container.addView(newImage);
+                            setImageViewWithByteArray(newImage, i.getImage());
+                        }
+                    });
+
+                }
+
+            }
+        }).start();
+
+
+
+    }
     
     public void play2moves (View v) {
         moveForward(v);
@@ -280,5 +319,18 @@ public class WatchGame extends AppCompatActivity {
         errorMessage.setDuration(Toast.LENGTH_LONG);
         errorMessage.show();
         return;
+    }
+
+    public void backgroundClick(View v) {
+        return;
+    }
+
+    public void pieceClick(View v) {
+        return;
+    }
+
+    private void setImageViewWithByteArray(ImageView view, byte[] data) {
+        Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+        view.setImageBitmap(bitmap);
     }
 }
