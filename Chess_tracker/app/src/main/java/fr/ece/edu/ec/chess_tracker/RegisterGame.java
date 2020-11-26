@@ -9,6 +9,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -30,9 +31,6 @@ import com.github.bhlangonijr.chesslib.move.Move;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,6 +46,7 @@ import fr.ece.edu.ec.chess_tracker.dataAcces.ChessGameImageDAO;
 import fr.ece.edu.ec.chess_tracker.dataAcces.PlayerDAO;
 
 public class RegisterGame extends AppCompatActivity {
+    public static final int REQUEST_CODE_CAMERA = 100;
     private Player me;
     private int idFirstTileHit = -1;
     private int idSecondTileHit = -1;
@@ -60,8 +59,9 @@ public class RegisterGame extends AppCompatActivity {
     Handler handler = new Handler();
 
     private Button takePictureButton;
-    //private Uri imageUri;
     private Bitmap image;
+    private Uri imageUri;
+    private String imagePath;
     private boolean hasTakenAPicture;
 
     @Override
@@ -101,9 +101,10 @@ public class RegisterGame extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
+        if (requestCode == REQUEST_CODE_CAMERA) {
             if (resultCode == RESULT_OK) {
-                image = (Bitmap) data.getExtras().get("data");
+                image = BitmapFactory.decodeFile(imagePath);
+                System.out.println("Image:" + image);
                 displayShortToast("Image has been added");
                 hasTakenAPicture = true;
             }
@@ -252,14 +253,16 @@ public class RegisterGame extends AppCompatActivity {
 
     public void takePicture(View v) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        //imageUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", getOutputMediaFile());
-        //intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        imageUri = FileProvider.getUriForFile(RegisterGame.this, RegisterGame.this.getApplicationContext().getPackageName() + ".provider", getOutputMediaFile());
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 
-        startActivityForResult(intent, 100);
+        startActivityForResult(intent, REQUEST_CODE_CAMERA);
     }
 
-    private static File getOutputMediaFile(){
-        //saving pictures into came file out of the application, we will also save it into the database in regiserGame(View V) or registerDraw(View V)
+    private File getOutputMediaFile(){
+        //saving pictures into camera file out of the application, we will also save it into the database in regiserGame(View V) or registerDraw(View V)
+
+        //here we get the directory where we'll put our image
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), "Chess_game");
 
@@ -272,8 +275,11 @@ public class RegisterGame extends AppCompatActivity {
 
         //saving pictures : developer.android.com/guide/topics/media/camera.html#saving-media
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        return new File(mediaStorageDir.getPath() + File.separator +
+        //file containing the image
+        File photoFile = new File(mediaStorageDir.getPath() + File.separator +
                 "IMG_"+ timeStamp + ".jpg");
+        imagePath = photoFile.getPath();
+        return photoFile;
     }
 
     private void initMap() {

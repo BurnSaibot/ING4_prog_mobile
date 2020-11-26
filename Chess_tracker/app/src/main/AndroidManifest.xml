@@ -46,7 +46,7 @@
         <activity
             android:name=".RegisterGame"
             android:label="@string/register_game" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".StartUpMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

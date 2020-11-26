@@ -6,22 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.github.bhlangonijr.chesslib.Board;
-import com.github.bhlangonijr.chesslib.Square;
-import com.github.bhlangonijr.chesslib.move.Move;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-
 import fr.ece.edu.ec.chess_tracker.business.Player;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class StartUpMenu extends AppCompatActivity implements View.OnClickListener{
     Player me;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_stat_up_menu);
     }
 
     @Override

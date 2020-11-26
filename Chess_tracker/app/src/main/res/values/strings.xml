@@ -4,7 +4,7 @@
     <string name="sign_up_string">Sign up</string>
     <string name="sign_out_string">Sign out</string>
     <string name="the_white">White Player</string>
-    <string name="the_dark">Dark Player</string>
+    <string name="the_dark">Black Player</string>
     <string name="name_player">Name:</string>
     <string name="surname_player">Surname:</string>
     <string name="elo_player">Elo:</string>
@@ -24,6 +24,6 @@
     <string name="surrenderWhite">White surrender</string>
     <string name="surrenderBlack">Black Surrender</string>
     <string name="draw">Draw</string>
-    <string name="currentMoveNumber">"Current Move: "</string>
+    <string name="currentMoveNumber">Current Move: #</string>
     <string name="registerPicture">Add image to game</string>
 </resources>
