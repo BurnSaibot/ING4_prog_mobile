@@ -253,7 +253,6 @@ public class WatchGame extends AppCompatActivity {
         Square from = Square.valueOf(move.getFrom());
         Square to = Square.valueOf(move.getTo());
         Move tmp = new Move(from, to);
-        Piece movedPiece = gameBoard.getPiece(from);
         RelativeLayout viewFrom = findViewById(squareToViewIds.get(from));
         ImageView pieceView = (ImageView) viewFrom.getChildAt(viewFrom.getChildCount()-1);
         ((RelativeLayout) pieceView.getParent()).removeView(pieceView);
@@ -278,7 +277,6 @@ public class WatchGame extends AppCompatActivity {
         ChessMove move = chessGame.getChessMoves().get(moveCounter-1);
         Square to = Square.valueOf(move.getFrom());
         Square from = Square.valueOf(move.getTo());
-        Piece movedPiece = gameBoard.getPiece(from);
         RelativeLayout viewFrom = findViewById(squareToViewIds.get(from));
         ImageView pieceView = (ImageView) viewFrom.getChildAt(viewFrom.getChildCount()-1);
         if (viewFrom.getChildCount()>2) {
