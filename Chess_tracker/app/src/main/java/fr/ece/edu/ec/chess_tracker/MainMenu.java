@@ -1,11 +1,15 @@
 package fr.ece.edu.ec.chess_tracker;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -33,6 +37,28 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
         myContext = this;
         update();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.general_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mapItem :
+                Intent openingHistory = new Intent(this, MapsActivity.class);
+                this.startActivity(openingHistory);
+                break;
+            case R.id.logOutItem :
+                Intent openMainActivity = new Intent(this, StartUpMenu.class);
+                this.startActivity(openMainActivity);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void update() {

@@ -26,4 +26,8 @@
     <string name="draw">Draw</string>
     <string name="currentMoveNumber">Current Move: #</string>
     <string name="registerPicture">Add image to game</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="loc_permitted">Location permission given</string>
+    <string name="locate_string">Localisation</string>
+    <string name="findLocation">Where am I ?</string>
 </resources>

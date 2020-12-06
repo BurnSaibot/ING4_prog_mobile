@@ -1,6 +1,7 @@
 
 package fr.ece.edu.ec.chess_tracker;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +11,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.StrictMode;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -32,6 +36,28 @@ public class RegisterPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.general_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mapItem :
+                Intent openingHistory = new Intent(this, MapsActivity.class);
+                this.startActivity(openingHistory);
+                break;
+            case R.id.logOutItem :
+                Intent openMainActivity = new Intent(this, StartUpMenu.class);
+                this.startActivity(openMainActivity);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void registerPlayer(View v) {

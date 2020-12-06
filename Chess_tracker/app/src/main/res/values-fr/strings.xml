@@ -27,4 +27,8 @@
     <string name="draw">Match Nul</string>
     <string name="currentMoveNumber">"Déplacement n° : "</string>
     <string name="registerPicture">Enregister une photo</string>
+    <string name="title_activity_maps">carte</string>
+    <string name="loc_permitted">Permissions de localisation données</string>
+    <string name="locate_string">Localisation</string>
+    <string name="findLocation">Où suis-je ?</string>
 </resources>
